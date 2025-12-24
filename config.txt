@@ -49,6 +49,8 @@
       nvidiaBusId = "PCI:1:0:0";
     };
   };
+#########################
+   
 
 
 
@@ -111,6 +113,9 @@
     yazi
     fish
     zsh
+    picom
+    nekoray
+    jdk
     #dotnet c#
     dotnet-sdk_10
     dotnet-runtime_10
