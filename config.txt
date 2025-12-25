@@ -25,34 +25,23 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 #######nvidia drivers########
-  
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.graphics.enable = true;  # важно!
-
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;  # или true для экспериментов
-    nvidiaSettings = true;
-
-    open = true;  # открытые модули ядра, лучше для Ampere (RTX 20xx/30xx/40xx/50xx)
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;  # или .latest для свежей
-
+    open = false; # Используем проприетарные драйверы
+    powerManagement.enable = true;
     prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;  # удобная команда nvidia-offload
-      };
-
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0"; # Шина встроенной Intel-карты
+      nvidiaBusId = "PCI:1:0:0"; # Шина дискретной NVIDIA-карты (проверить в lspci)
+      sync = true;
     };
-  };
+  };  
+
 #########################
    
 
-
+#flatpak
+  services.flatpak.enable = true;
 
 
 #gnome
@@ -112,8 +101,6 @@
     telegram-desktop
     yazi
     fish
-    zsh
-    picom
     nekoray
     jdk
     #dotnet c#
