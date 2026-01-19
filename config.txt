@@ -24,21 +24,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-#######nvidia drivers########
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false; # Используем проприетарные драйверы
-    powerManagement.enable = true;
-    prime = {
-      intelBusId = "PCI:0:2:0"; # Шина встроенной Intel-карты
-      nvidiaBusId = "PCI:1:0:0"; # Шина дискретной NVIDIA-карты (проверить в lspci)
-      sync = true;
-    };
-  };  
 
-#########################
-   
+#nvidia
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.open = true;
+
 
 #flatpak
   services.flatpak.enable = true;
